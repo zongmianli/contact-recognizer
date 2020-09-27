@@ -1,0 +1,12 @@
+batch_size 4
+freeze_depth 5
+lr 0.005
+lr_decay_stepsize 20
+momentum 0.9
+weight_decay 0.0005
+rotdegree 10
+hflip true
+brightness 0.1
+contrast 0.1
+saturation 0.1
+hue 0.05
