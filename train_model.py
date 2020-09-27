@@ -102,7 +102,6 @@ def train_model(dataloaders,
     time_elapsed = time.time() - since
     print(' - (train_model.py) Training took {:.0f}m {:.0f}s'.format(
         time_elapsed // 60, time_elapsed % 60))
-    #print(' - (train_model.py) Lowest val_loss: {:6f}'.format(lowest_loss))
 
     # Load best model weights
     model_ft.load_state_dict(best_model)

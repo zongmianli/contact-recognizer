@@ -23,15 +23,12 @@ from sklearn.metrics import roc_curve, auc
 from contact_dataset import ContactDataset
 
 
-def evaluate_model(jname,
-                   dataloaders,
+def evaluate_model(dataloaders,
                    classes,
                    phase_names,
                    dataset_sizes,
                    model_ft,
                    use_gpu):
-
-    print("(evaluate_model.py) Starting evaluation ...")
 
     nclasses = len(classes)
     model_ft.train(False)
@@ -76,7 +73,6 @@ def evaluate_model(jname,
 
         # calculate accuracy over all classes
         accuracy = ncorrects / dataset_sizes[phase]
-        print(' - {0} acc: {1:.4f}'.format(phase, accuracy))
 
         # calculate PR curve and average precision using scikit-learn
         labels_bin = label_binarize(labels_all, classes=range(3))
@@ -99,8 +95,6 @@ def evaluate_model(jname,
             fpr[name], tpr[name], _ = \
                 roc_curve(labels_bin[:, n], scores_all[:, n])
             roc_auc[name] = auc(fpr[name], tpr[name])
-            print(' - AP {0}: {1:0.2f}'.format(name, average_precision[name]))
-            print(' - roc_auc {0}: {1:0.2f}'.format(name, roc_auc[name]))
 
         acc_by_phase[phase] = accuracy
 

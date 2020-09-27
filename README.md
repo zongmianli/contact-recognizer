@@ -25,6 +25,8 @@ Human joints recognized as in contact are shown in green, joints not in contact 
 
 ### Install contact recognizer
 
+Please note that, for convenience, we will use `~/contact-recognizer` as the default local directory for installing, training and testing contact recognizers.
+
 1. Make a local copy of the project:
    ```terminal
    git clone https://github.com/zongmianli/contact-recognizer.git ~/contact-recognizer

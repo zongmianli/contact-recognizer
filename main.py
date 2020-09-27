@@ -58,8 +58,9 @@ def rank_model(models_folder,
             if accept_id:
                 break
 
-    save_name = "{0}_{1}_map{2:0.2f}_acc{3:0.4f}".format(
-        parameters_id, checkpoint_id, mean_ap, acc)
+    save_name = "{0}_{1}_{2}".format(
+        parameters_id, checkpoint_id, hf_name)
+
     checkpoint_path = join(models_dir, 'checkpoints', save_name+'.pth.tar')
     model_eval = {'save_name':save_name,
                   'parameters_id':parameters_id,
@@ -519,9 +520,8 @@ def main(experiment_dir,
     # ------------------------------------------------------------------
     # Evaluate estimation accuracy, precision-recall and ROC
 
-    acc_by_phase, precision_by_phase, recall_by_phase, ap_by_phase, tpr_by_phase, fpr_by_phase, roc_auc_by_phase, scores_by_phase, labels_by_phase = \
-        evaluate_model(joint_name,
-                       dataloaders,
+    acc_by_phase, _, _, ap_by_phase, _, _, _, _, _ = \
+        evaluate_model(dataloaders,
                        classes,
                        phase_names,
                        dataset_sizes,
@@ -530,7 +530,7 @@ def main(experiment_dir,
 
     # Compute mAPs from ap_by_phase
     map_by_phase = dict()
-    ignore_labels = [2] # ignore the "occluded" label for computing mAP
+    ignore_labels = [] # ignore the "occluded" label for computing mAP
     for phase in phase_names:
         map_effective = []
         for n in range(nclasses):
